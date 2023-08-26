@@ -11,4 +11,3 @@ pipelines:
           name: 'PR branch'
           script:
             - echo "This branch on PR will be merged in" $BITBUCKET_PR_DESTINATION_BRANCH
-
