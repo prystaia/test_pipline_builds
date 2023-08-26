@@ -6,9 +6,20 @@ pipelines:
       - step:
           name: 'Build and Test'
           script:
-            - echo "this branch name is" $BITBUCKET_BRANCH
+            - echo "this runs on commits to branch name is" $BITBUCKET_BRANCH
       - step:
           name: 'PR branch'
           script:
-            - echo "This branch will be merged in" $BITBUCKET_PR_DESTINATION_BRANCH
+            - echo "This runs on commits to in destination branch" $BITBUCKET_PR_DESTINATION_BRANCH
+            
+  pull-requests:
+    JCC*:
+      - step:
+          name: 'Build and Test'
+          script:
+            - echo "this branch runs on PR with name is" $BITBUCKET_BRANCH
+      - step:
+          name: 'PR branch'
+          script:
+            - echo "This branch on PR will be merged in" $BITBUCKET_PR_DESTINATION_BRANCH
 
