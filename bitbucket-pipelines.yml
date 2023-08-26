@@ -1,17 +1,6 @@
 image: atlassian/default-image:3
 
-pipelines:
-  branches:
-    JCC*:
-      - step:
-          name: 'Build and Test'
-          script:
-            - echo "this runs on commits to branch name is" $BITBUCKET_BRANCH
-      - step:
-          name: 'PR branch'
-          script:
-            - echo "This runs on commits to in destination branch" $BITBUCKET_PR_DESTINATION_BRANCH
-            
+pipelines:  
   pull-requests:
     JCC*:
       - step:
