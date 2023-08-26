@@ -1,0 +1,13 @@
+image: atlassian/default-image:3
+
+pipelines:  
+  pull-requests:
+    JCC*:
+      - step:
+          name: 'Build and Test'
+          script:
+            - echo "this branch runs on PR with name is" $BITBUCKET_BRANCH
+      - step:
+          name: 'PR branch'
+          script:
+            - echo "This branch on PR will be merged in" $BITBUCKET_PR_DESTINATION_BRANCH
