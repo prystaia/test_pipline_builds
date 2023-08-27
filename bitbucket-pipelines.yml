@@ -9,7 +9,7 @@ pipelines:
           script:
             - git config --global user.email "apr@global-mediator.com"
             - git config --global user.name $BITBUCKET_REPO_OWNER
-            - git clone -b $BITBUCKET_BRANCH $BITBUCKET_GIT_SSH_ORIGIN
+            - git clone -b $BITBUCKET_BRANCH git@bitbucket.org/prystaia1/test_pipline_builds
             - cd $BITBUCKET_CLONE_DIR
             - git remote add devops git@github.com:prystaia/test_pipline_builds.git
             - git checkout -b feature/$BITBUCKET_BRANCH
@@ -22,8 +22,8 @@ pipelines:
           name: 'PR branch'
           script:
             - echo "This branch on PR will be merged in" $BITBUCKET_PR_DESTINATION_BRANCH
-
-    branches: 
+            
+  branches: 
       master:
       - step:
           name: "Sync master to GitHub main"
@@ -33,7 +33,7 @@ pipelines:
           script:
             - git config --global user.email "apr@global-mediator.com"
             - git config --global user.name $BITBUCKET_REPO_OWNER
-            - git clone -b $BITBUCKET_BRANCH $BITBUCKET_GIT_SSH_ORIGIN
+            - git clone -b $BITBUCKET_BRANCH git@bitbucket.org/prystaia1/test_pipline_builds
             - cd $BITBUCKET_CLONE_DIR
             - git remote add devops git@github.com:prystaia/test_pipline_builds.git
             - git checkout -b main
