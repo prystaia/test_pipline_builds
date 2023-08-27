@@ -1,4 +1,4 @@
-image:pipelines:  
+pipelines:  
   pull-requests:
     JCC*:
       - step:
