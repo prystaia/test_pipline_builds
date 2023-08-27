@@ -14,8 +14,6 @@ pipelines:
             - git remote add devops git@github.com:prystaia/test_pipline_builds.git
             - git checkout -b feature/$BITBUCKET_BRANCH
             - git merge $BITBUCKET_BRANCH
-            - git fetch devops feature/$BITBUCKET_BRANCH
-            - git merge devops/feature/$BITBUCKET_BRANCH --allow-unrelated-histories
             - git push -u devops feature/$BITBUCKET_BRANCH:feature/$BITBUCKET_BRANCH
 
       - step:
