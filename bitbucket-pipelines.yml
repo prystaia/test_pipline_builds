@@ -1,13 +1,43 @@
-image: atlassian/default-image:3
-
-pipelines:  
+image:pipelines:  
   pull-requests:
     JCC*:
       - step:
-          name: 'Build and Test'
+          name: 'Sync ' $BITBUCKET_BRANCH 'to GitHub main'
+          image: alpine/git:latest
+          clone:
+            enabled: false
           script:
-            - echo "this branch runs on PR with name is" $BITBUCKET_BRANCH
+            - git config --global user.email "apr@global-mediator.com"
+            - git config --global user.name $BITBUCKET_REPO_OWNER
+            - git clone -b $BITBUCKET_BRANCH $BITBUCKET_GIT_SSH_ORIGIN
+            - cd $BITBUCKET_CLONE_DIR
+            - git remote add devops git@github.com:prystaia/test_pipline_builds.git
+            - git checkout -b feature/$BITBUCKET_BRANCH
+            - git merge $BITBUCKET_BRANCH
+            - git fetch devops feature/$BITBUCKET_BRANCH
+            - git merge devops/feature/$BITBUCKET_BRANCH --allow-unrelated-histories
+            - git push -u devops feature/$BITBUCKET_BRANCH:feature/$BITBUCKET_BRANCH
+
       - step:
           name: 'PR branch'
           script:
             - echo "This branch on PR will be merged in" $BITBUCKET_PR_DESTINATION_BRANCH
+
+    branches: 
+      master:
+      - step:
+          name: "Sync master to GitHub main"
+          image: alpine/git:latest
+          clone:
+            enabled: false
+          script:
+            - git config --global user.email "apr@global-mediator.com"
+            - git config --global user.name $BITBUCKET_REPO_OWNER
+            - git clone -b $BITBUCKET_BRANCH $BITBUCKET_GIT_SSH_ORIGIN
+            - cd $BITBUCKET_CLONE_DIR
+            - git remote add devops git@github.com:prystaia/test_pipline_builds.git
+            - git checkout -b main
+            - git merge $BITBUCKET_BRANCH
+            - git fetch devops main
+            - git merge devops/main --allow-unrelated-histories
+            - git push -u devops main:main
