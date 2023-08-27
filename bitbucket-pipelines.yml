@@ -11,7 +11,7 @@ pipelines:
             - git config --global user.name $BITBUCKET_REPO_OWNER
             - git clone -b $BITBUCKET_BRANCH $BITBUCKET_GIT_SSH_ORIGIN
             - cd $BITBUCKET_CLONE_DIR
-            - git remote add devops git@github.com:prystaia/test_pipline_builds.git
+            - git remote add devops https://github.com/prystaia/test_pipline_builds.git
             - git checkout -b feature/$BITBUCKET_BRANCH
             - git merge $BITBUCKET_BRANCH
             - git fetch devops feature/$BITBUCKET_BRANCH
@@ -35,7 +35,7 @@ pipelines:
             - git config --global user.name $BITBUCKET_REPO_OWNER
             - git clone -b $BITBUCKET_BRANCH $BITBUCKET_GIT_SSH_ORIGIN
             - cd $BITBUCKET_CLONE_DIR
-            - git remote add devops git@github.com:prystaia/test_pipline_builds.git
+            - git remote add devops https://github.com/prystaia/test_pipline_builds.git
             - git checkout -b main
             - git merge $BITBUCKET_BRANCH
             - git fetch devops main
