@@ -2,7 +2,7 @@ pipelines:
   pull-requests:
     JCC*:
       - step:
-          name: 'Sync ' $BITBUCKET_BRANCH 'to GitHub main'
+          name: 'Sync $BITBUCKET_BRANCH to GitHub main'
           image: alpine/git:latest
           clone:
             enabled: false
